@@ -135,3 +135,12 @@ testimonialsTexts.forEach(container => {
   });
 
 });
+
+const tList = document.querySelector(".testimonials-list");
+
+tList.addEventListener("scroll", () => {
+  const maxScroll = tList.scrollWidth - tList.clientWidth;
+  const percent = tList.scrollLeft / maxScroll;
+
+  const indicator = getComputedStyle(tList, "::after");
+});
