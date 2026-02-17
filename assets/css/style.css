@@ -671,53 +671,50 @@ html {
  * #testimonials 
  */
 
-.testimonials { margin-bottom: 30px; }
+.testimonials { 
+  margin-bottom: 30px; 
+  position: relative;
+}
 
-.testimonials-title { margin-bottom: 20px; }
+.testimonials-title { 
+  margin-bottom: 20px; 
+}
 
+/* LIST */
 .testimonials-list {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
   gap: 15px;
-  margin: 0 -15px;
-  padding: 25px 15px;
-  padding-bottom: 35px;
+
+  padding: 25px 15px 35px 15px;
+
   overflow-x: auto;
   scroll-behavior: smooth;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: inline mandatory;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
+/* ITEM */
 .testimonials-item {
-  min-width: 100%;
-  scroll-snap-align: center;
+  min-width: 85%; /* 👈 أهم تعديل */
+  scroll-snap-align: start;
 }
 
+/* AVATAR */
 .testimonials-avatar-box {
   position: absolute;
   top: 0;
   left: 0;
   transform: translate(15px, -25px);
-  /* background: var(--bg-gradient-onyx); */
   border-radius: 8px;
   box-shadow: var(--shadow-1);
 }
 
-.testimonials-item-title { margin-bottom: 7px; }
-/* البلح */
-/* .testimonials-text {
-  color: var(--light-gray);
-  font-size: var(--fs-6);
-  font-weight: var(--fw-300);
-  line-height: 1.6;
-  display: -webkit-box;
-  line-clamp: 4;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-} */
+.testimonials-item-title { 
+  margin-bottom: 7px; 
+}
 
+/* TEXT */
 .testimonials-text {
   color: var(--light-gray);
   font-size: var(--fs-6);
@@ -727,17 +724,16 @@ html {
 
 .testimonials-text p {
   display: block;
-  max-height: 4.8em; /* 3 سطور تقريبًا */
+  max-height: 4.8em;
   overflow: hidden;
   transition: max-height 0.35s ease;
 }
 
-/* عند التوسيع */
 .testimonials-text p.expanded {
-  max-height: 200px; /* قيمة كبيرة تكفي النص */
+  max-height: 200px;
 }
 
-/* زرار */
+/* READ MORE */
 .read-more-btn {
   display: inline-block;
   margin-top: 6px;
@@ -747,8 +743,7 @@ html {
   font-weight: 500;
 }
 
-
-
+/* ROLE */
 .testimonials-role {
   font-size: 12px;
   color: #a855f7;
@@ -757,6 +752,17 @@ html {
   font-weight: 500;
 }
 
+/* FADE HINT (Premium Touch) */
+.testimonials::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--bg-primary));
+  pointer-events: none;
+}
 /* .testimonials-text {
     color: var(--light-gray);
     font-size: var(--fs-6);
