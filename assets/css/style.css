@@ -673,34 +673,49 @@ html {
 
 .testimonials { 
   margin-bottom: 30px; 
-  position: relative;
+  position: relative; /* مهم للبار */
 }
 
 .testimonials-title { 
   margin-bottom: 20px; 
 }
 
-/* LIST */
 .testimonials-list {
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 15px;
 
-  padding: 25px 15px 35px 15px;
+  margin: 0 -15px;
+  padding: 25px 15px 55px; /* مساحة للبار */
 
   overflow-x: auto;
   scroll-behavior: smooth;
 
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
 }
 
-/* ITEM */
+/* 👇 البار البنفسجي الثابت */
+.testimonials-list::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: 15px;
+
+  width: 120px;
+  height: 4px;
+
+  background: linear-gradient(90deg,#a855f7,#9333ea);
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
 .testimonials-item {
-  min-width: 85%; /* 👈 أهم تعديل */
-  scroll-snap-align: start;
+  min-width: 100%;
+  scroll-snap-align: center;
 }
 
-/* AVATAR */
 .testimonials-avatar-box {
   position: absolute;
   top: 0;
@@ -715,6 +730,7 @@ html {
 }
 
 /* TEXT */
+
 .testimonials-text {
   color: var(--light-gray);
   font-size: var(--fs-6);
@@ -734,6 +750,7 @@ html {
 }
 
 /* READ MORE */
+
 .read-more-btn {
   display: inline-block;
   margin-top: 6px;
@@ -744,6 +761,7 @@ html {
 }
 
 /* ROLE */
+
 .testimonials-role {
   font-size: 12px;
   color: #a855f7;
@@ -752,17 +770,6 @@ html {
   font-weight: 500;
 }
 
-/* FADE HINT (Premium Touch) */
-.testimonials::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 40px;
-  height: 100%;
-  background: linear-gradient(to right, transparent, var(--bg-primary));
-  pointer-events: none;
-}
 /* .testimonials-text {
     color: var(--light-gray);
     font-size: var(--fs-6);
