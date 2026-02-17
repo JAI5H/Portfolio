@@ -682,8 +682,6 @@ html {
 
 .testimonials-list {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
   gap: 15px;
 
   margin: 0 -15px;
@@ -696,19 +694,20 @@ html {
   scroll-snap-type: inline mandatory;
 }
 
-/* 👇 البار البنفسجي الثابت */
-.testimonials-list::after {
+/* 👇 ده البار اللي هيظهر على الموبايل */
+.testimonials::after {
   content: "";
   position: absolute;
-  left: 20px;
-  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
 
   width: 120px;
   height: 4px;
 
   background: linear-gradient(90deg,#a855f7,#9333ea);
   border-radius: 10px;
-  opacity: 0.9;
+  opacity: .9;
 }
 
 .testimonials-item {
@@ -739,7 +738,6 @@ html {
 }
 
 .testimonials-text p {
-  display: block;
   max-height: 4.8em;
   overflow: hidden;
   transition: max-height 0.35s ease;
@@ -769,6 +767,7 @@ html {
   margin-bottom: 8px;
   font-weight: 500;
 }
+
 
 /* .testimonials-text {
     color: var(--light-gray);
