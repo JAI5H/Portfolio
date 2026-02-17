@@ -136,11 +136,3 @@ testimonialsTexts.forEach(container => {
 
 });
 
-const list = document.querySelector(".testimonials-list");
-const bar = document.querySelector(".scroll-indicator");
-
-list.addEventListener("scroll", () => {
-  const max = list.scrollWidth - list.clientWidth;
-  const percent = list.scrollLeft / max;
-  bar.style.transform = `translateX(${percent * 100}px)`;
-});

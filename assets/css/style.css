@@ -542,6 +542,53 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (max-width: 600px) {
+  /* Hide horizontal scrollbar chrome/safari on mobile, keep swipe */
+  .has-scrollbar {
+    position: relative;
+    -ms-overflow-style: none; /* IE/Edge legacy */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .has-scrollbar::-webkit-scrollbar {
+    height: 0;
+  }
+
+  /* Swipe affordance: edge fade + chevron hint */
+  .has-scrollbar::before {
+    content: "";
+    position: absolute;
+    inset: 6px auto 6px 0;
+    width: 26px;
+    background: linear-gradient(to right, rgba(19, 0, 33, 0.9), rgba(19, 0, 33, 0));
+    pointer-events: none;
+    opacity: 0.65;
+    z-index: 2;
+  }
+
+  .has-scrollbar::after {
+    content: "›";
+    position: absolute;
+    inset: 6px 0 6px auto;
+    width: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.75);
+    background: linear-gradient(to left, rgba(19, 0, 33, 0.9), rgba(19, 0, 33, 0));
+    pointer-events: none;
+    z-index: 2;
+    animation: swipeHint 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes swipeHint {
+  0%, 100% { transform: translateX(0); opacity: 0.85; }
+  50% { transform: translateX(7px); opacity: 1; }
+}
+
 
 /*-----------------------------------*\
   #NAVBAR
@@ -671,48 +718,32 @@ html {
  * #testimonials 
  */
 
-.testimonials { 
-  margin-bottom: 30px; 
-  position: relative; /* مهم للبار */
-}
+.testimonials { margin-bottom: 30px; }
 
-.testimonials-title { 
-  margin-bottom: 20px; 
-}
+.testimonials-title { margin-bottom: 20px; }
 
 .testimonials-list {
   display: flex;
+  justify-content: flex-start;
+  align-items: stretch; /* كل الكروت نفس الارتفاع */
   gap: 15px;
-
   margin: 0 -15px;
-  padding: 25px 15px 55px; /* مساحة للبار */
-
+  padding: 25px 15px;
+  padding-bottom: 35px;
   overflow-x: auto;
   scroll-behavior: smooth;
-
   overscroll-behavior-inline: contain;
   scroll-snap-type: inline mandatory;
-}
-
-/* 👇 ده البار اللي هيظهر على الموبايل */
-.testimonials::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 12px;
-
-  width: 120px;
-  height: 4px;
-
-  background: linear-gradient(90deg,#a855f7,#9333ea);
-  border-radius: 10px;
-  opacity: .9;
 }
 
 .testimonials-item {
   min-width: 100%;
   scroll-snap-align: center;
+  display: flex;
+}
+
+.testimonials-item .content-card {
+  flex: 1;
 }
 
 .testimonials-avatar-box {
@@ -720,15 +751,18 @@ html {
   top: 0;
   left: 0;
   transform: translate(15px, -25px);
-  border-radius: 8px;
+  background: var(--border-gradient-onyx);
+  padding: 2px;
+  border-radius: 14px;
   box-shadow: var(--shadow-1);
 }
 
-.testimonials-item-title { 
-  margin-bottom: 7px; 
+.testimonials-avatar-box img {
+  display: block;
+  border-radius: inherit;
 }
 
-/* TEXT */
+.testimonials-item-title { margin-bottom: 7px; }
 
 .testimonials-text {
   color: var(--light-gray);
@@ -738,27 +772,17 @@ html {
 }
 
 .testimonials-text p {
-  max-height: 4.8em;
+  display: block;
+  max-height: 4.8em; /* تقريبًا 3 سطور افتراضيًا */
   overflow: hidden;
   transition: max-height 0.35s ease;
 }
 
 .testimonials-text p.expanded {
-  max-height: 200px;
+  max-height: 200px; /* تسمح بعرض باقي النص */
 }
 
-/* READ MORE */
 
-.read-more-btn {
-  display: inline-block;
-  margin-top: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  color: #a855f7;
-  font-weight: 500;
-}
-
-/* ROLE */
 
 .testimonials-role {
   font-size: 12px;
@@ -767,7 +791,6 @@ html {
   margin-bottom: 8px;
   font-weight: 500;
 }
-
 
 /* .testimonials-text {
     color: var(--light-gray);
@@ -1250,6 +1273,23 @@ html {
   border-radius: inherit;
   background: var(--bg-secondary);
   z-index: -1;
+}
+
+/* underline gradient for "Read More" links in testimonials */
+.testimonials .content-card a {
+  position: relative;
+  width: max-content;
+}
+
+.testimonials .content-card a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--text-gradient-accent);
 }
 
 .certificates-banner-box {
